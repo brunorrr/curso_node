@@ -2,7 +2,7 @@
 	<html lang="pt-br">
 		<head>
 			<meta charset="utf-8"/>
-			<title>Formul?io de cadastro de Not?ia</title>
+			<title>Formulário de cadastro de Notícia</title>
 		</head>
 	<body>
 
@@ -24,31 +24,33 @@
 					<label for="titulo">
 						Título
 					</label>
-					<input type="text" id="titulo" name="titulo" placeholder="Título da Notícia" />
+					<input type="text" id="titulo" name="titulo" value="<%=noticia.titulo%>" placeholder="Título da Notícia" />
 				</li>
 				<li>
 					<label for="resumo">
 						Resumo
 					</label>
-					<input type="text" name="resumo" placeholder="Resumo da notícia" />
+					<input type="text" name="resumo" value="<%=noticia.resumo%>" placeholder="Resumo da notícia" />
 				</li>
 				<li>
 					<label for="autor">
 						Autor
 					</label>
-					<input type="text" name="autor" placeholder="Autor da notícia" />
+					<input type="text" name="autor" value="<%=noticia.autor%>" placeholder="Autor da notícia" />
 				</li>
 				<li>
 					<label for="data_noticia">
 						Data
 					</label>
-					<input type="date" name="data_noticia" placeholder="Data da notícia" />
+					<input type="date" name="data_noticia" value="<%=noticia.data_noticia%>" placeholder="Data da notícia" />
 				</li>
 				<li>
 					<label for="noticia">
 						Conteúdo
 					</label>
-					<textarea id="noticia" name="noticia" rows="5" cols="30"></textarea>
+					<textarea id="noticia" name="noticia" rows="5" cols="30">
+						<%=noticia.noticia%>
+					</textarea>
 				</li> 
 				<li>
 					<input type="submit" value="Enviar" />
