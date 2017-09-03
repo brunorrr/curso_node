@@ -3,7 +3,8 @@
 */
 
 //Chama o módulo Express para organização de views
-var app = require('express')();
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
 var consign = require('consign');
 var expressValidator = require('Express-validator');
@@ -19,6 +20,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //Carrega o Express-validator para a validação de campos
 app.use(expressValidator());
+
+//Chamando os arquivos estáticos e definindo por padrão que eles estão dentro de app/public
+app.use(express.static('./app/public'));
 
 //Carrega o Consign que automatiza os scripts e permite a organização por diretórios
 consign().include('app/routes')
