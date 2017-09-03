@@ -7,8 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bruno Ricci",
+  "email": "brunoriccidossantos@hotmail.com",
+  "url": "https://github.com/brunorrr",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "consign": "^0.1.6",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
