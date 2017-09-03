@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="UTF-8"/>
+			<title>Portal de Notícias</title>
+		</head>
+	<body>
+
+		<h1>Portal de Notícias</h1>
+
+		<h2>Notícias</h2>
+
+		<ul>
+			<% for( var cont = 0 ; cont < noticias.length ; cont++) { %>
+				<li>
+					<h3>
+						<%= noticias[cont].titulo %>
+					</h3>
+					<span>
+						<%= new Date(noticias[cont].data_criacao).toLocaleDateString() %>
+					</span>
+					<p>
+						<%= noticias[cont].noticia %>
+					</p>
+				</li>
+			<% } %>
+		</ul>
+
+	</body>
+</html>

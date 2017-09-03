@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="utf-8"/>
+			<title>Portal de notícias</title>
+		</head>
+	<body>
+
+		<h1>Notícia</h1>
+
+		<ul>
+				<li>
+					<h3>
+						<%= noticia[0].titulo %>
+					</h3>
+					<span>
+						<%= new Date(noticia[0].data_criacao).toLocaleDateString() %>
+					</span>
+					<p>
+						<%= noticia[0].noticia %>
+					</p>
+				</li>
+		</ul>
+
+	</body>
+</html>
