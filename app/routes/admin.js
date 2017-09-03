@@ -13,12 +13,11 @@ module.exports = function(app){
 	app.post('/noticias/salvar', function(req, res){
 		var noticia = req.body;
 
-		//Realizando conexão
-		var con = app.config.dbConnection();
-		var noticiasModel = app.app.models.noticiasModel;
+		var noticiasModel = new app.app.models.NoticiasDAO(
+				app.config.dbConnection());
 
 		//Sanvando informação
-		noticiasModel.salvarNoticia(noticia, con, function(erro, result){
+		noticiasModel.salvarNoticia(noticia, function(erro, result){
 			//Retorna status 302 redirecionando para /noticias
 			res.redirect('/noticias');
 		});

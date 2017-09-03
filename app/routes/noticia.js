@@ -2,10 +2,10 @@ module.exports = function(app){
 
 	app.get('/noticia', function(req, res){
 
-		var con = app.config.dbConnection();
-		var noticiaModel = app.app.models.noticiasModel;
+		var noticiaModel = app.app.models.NoticiasDAO(
+				app.config.dbConnection());
 
-		noticiaModel.getDetalheNoticia(con, function(erro, result){
+		noticiaModel.getDetalheNoticia(function(erro, result){
 			res.render('noticias/noticia', { noticia : result });
 		});
 	});
