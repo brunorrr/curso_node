@@ -12,7 +12,7 @@ NoticiasDAO.prototype.getNoticias = function(callback){
 };
 
 NoticiasDAO.prototype.getDetalheNoticia = function(callback){
-	this._connection.query('select * from noticias where id_noticias = 2', callback);
+	this._connection.query('select * from noticias where id_noticias = 1', callback);
 };
 
 /**
