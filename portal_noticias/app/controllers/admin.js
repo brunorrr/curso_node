@@ -1,8 +1,24 @@
+/*
+	Controlador das funções de Admin do portal
+ */
+
+/**
+ * Controlador do carregamento da tela do formulário de inclusão de notícias
+ * @param  {Object} app Contexto da aplicação com o consign
+ * @param  {Object} req Requisição
+ * @param  {Object} res Resposta
+ */
 module.exports.formulario_inclusao_noticia = function(app, req, res){
 	//Envia-se as variáveis de validação e erro vazias para não causar erro na renderização inicial
 	res.render('admin/form_add_noticia', {validacao: {}, noticia: {}});
 }
 
+/**
+ * Controlador do salvamento da notícia
+ * @param  {Object} app Contexto da aplicação com o consign
+ * @param  {Object} req Requisição
+ * @param  {Object} res Resposta
+ */
 module.exports.noticias_salvar = function(app, req, res){
 	var noticia = req.body;
 
