@@ -1,0 +1,26 @@
+{
+  "name": "multiroom_chat",
+  "version": "1.0.0",
+  "description": "Chat em tempo real de multisalas com Websocket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brunorrr/curso_node.git"
+  },
+  "author": "Bruno Ricci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunorrr/curso_node/issues"
+  },
+  "homepage": "https://github.com/brunorrr/curso_node#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "consign": "^0.1.6",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-validator": "^4.2.1"
+  }
+}
