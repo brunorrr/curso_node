@@ -1,9 +1,17 @@
-//Criando uma classe de entidade Que defina AS notícias
+/*
+	Módulo de conexão e query no Banco de Dados para os objetos de Notícias
+ */
+
+/**
+ * DAO das notícias
+ * @param {Object} Conexão com o Banco de Dados
+ */
 function NoticiasDAO(connection){
 
 	/**
-		Conexão das notícias
-	*/
+	 * Conexão das notícias
+	 * @type {Object}
+	 */
 	this._connection = connection;
 }
 
@@ -19,10 +27,10 @@ NoticiasDAO.prototype.getDetalheNoticia = function(id_noticia, callback){
 };
 
 /**
-	Salva uma notícia no BD
-	@params noticia Json da notícia a ser salva
-	@params callback Callback a ser chamada após a execução
-*/
+ * Salva uma notícia no BD
+ * @param  {Object}   noticia  Json da notícia a ser salva
+ * @param  {Function} callback Callback a ser chamada após a execução
+ */
 NoticiasDAO.prototype.salvarNoticia = function(noticia, callback){
 	//Realizando a insersão com o SQL modificado do JS, com a informação set pode-se passar 
 	//O json diretamente para o BD desde que os campos do json tenham o mesmo nome das colunas do BD

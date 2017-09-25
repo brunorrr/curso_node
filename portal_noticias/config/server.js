@@ -9,7 +9,9 @@ var bodyParser = require('body-parser');
 var consign = require('consign');
 var expressValidator = require('Express-validator');
 
+//Setando a engine EJS para a renderização das views no express
 app.set('view engine', 'ejs');
+//Setando o path das views para as consultas
 app.set('views', './app/views');
 
 //Importa variáveis de configuração
