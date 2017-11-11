@@ -71,7 +71,14 @@
 		<div class="container">
             <div class="row conversa" id="conversa">
 				<div class="col-md-1"></div>
+<<<<<<< HEAD
 				<div class="col-md-10" id="dialogos">
+=======
+				<div class="col-md-10">
+					<!-- Caixas diálogo -->
+					<div id="dialogos">
+					</div>
+>>>>>>> 16b3063
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -79,21 +86,8 @@
 			
 			<div class="row participantes" id="participantes" style="display:none">
 				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Jorge
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						José
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Fernando
-					</span>
+				<div class="col-md-10" id="pessoas">
+
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -103,13 +97,16 @@
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				<div class="panel-body campo-mensagem">
-					<form>
+					<form action="" id="form-envio-msg">
 						<div class="col-md-12">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Mensagem">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">></button>
-								</span>
+									<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
+									<input type="hidden" id="apelido" value="<%=dadosForm.apelido%>" />
+									<!-- Chave para verificar se o apelido está atualizado nos clientes -->
+									<input type="hidden" id="apelido_atualizado" value="0" />
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit" id="enviar_mensagem">></button>
+									</span>
 							</div>
 						</div>
 					</form>
@@ -119,6 +116,7 @@
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
 		<script src="/socket.io/socket.io.js"></script>
 
 		<script>
@@ -136,5 +134,46 @@
 
 		</script>
 		
+=======
+		<script src="socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io('http://localhost');
+
+			$('#form-envio-msg').on('submit',function(e){
+				if( $('#mensagem').val() ){
+					socket.emit(
+						'msgParaServidor',
+						{apelido: $('#apelido').val(), 
+						mensagem: $('#mensagem').val(),
+						apelido_atualizado : $('#apelido_atualizado').val()}
+					);
+					$('#apelido_atualizado').val('1');
+					$('#mensagem').val('');
+				}
+				e.preventDefault();
+			});
+
+			socket.on('msgParaCliente', function(data){
+
+				var html = '<div class="dialogo">'+
+					'<h4>' + data.apelido + '</h4>' +
+					'<p>' + data.mensagem + '</p>' + 
+				'</div>';
+
+				$('#dialogos').append(html);
+
+				window.scrollTo(0, document.body.scrollHeight)
+			})
+
+			socket.on('participantesParaCliente', function(data){
+				var html = '<span class="participante">' +
+					'<img src="images/ico_usuario.png" alt="Imagem usuário" />' +
+					data.apelido +
+				'</span>';
+				console.log(data);
+				$('#pessoas').append(html);
+			})
+		</script>
+>>>>>>> 16b3063
 	</body>
 </html>
