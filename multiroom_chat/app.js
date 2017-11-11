@@ -8,11 +8,19 @@ var server = app.listen(app.config.serverPort, function(){
 
 var io = require('socket.io').listen(server);
 
+app.set('io', io);
+
 /* 	Criando conexão via websocket */
 io.on('connection',function(socket){
 	console.log('O usuário conectou-se');
 
 	io.on('disconnect',function(socket){
 		console.log('O usuário desconectou-se');
+	});
+
+	socket.on('msgParaServidor', function(data){
+		io.emit('msgParaCliente',
+		{ apelido: data.apelido, mensagem: data.mensagem} );
+
 	});
 });
