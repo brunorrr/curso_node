@@ -19,8 +19,15 @@ io.on('connection',function(socket){
 	});
 
 	socket.on('msgParaServidor', function(data){
+
 		io.emit('msgParaCliente',
 		{ apelido: data.apelido, mensagem: data.mensagem} );
+
+		/* participantes */
+		if( data.apelido_atualizado == '0' ){
+			io.emit('participantesParaCliente',
+			{ apelido: data.apelido } );
+		}
 
 	});
 });
