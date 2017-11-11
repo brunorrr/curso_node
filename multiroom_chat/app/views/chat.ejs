@@ -71,31 +71,7 @@
 		<div class="container">
             <div class="row conversa" id="conversa">
 				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Fala José, blz cara?</p>
-					</div>
-					
-					<div class="dialogo">
-						<h4>José</h4>
-						<p>Opa, tudo certo!</p>
-					</div>
-					
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Vai estudar mais sobre NodeJS hoje?</p>
-					</div>
-					
-					<div class="dialogo">
-						<h4>José</h4>
-						<p>Sim, com certeza. Vamos trabalhar com Websockets hoje, o assunto é bem interessante</p>
-					</div>
-					
-					<div class="dialogo">
-						<h4>Jorge</h4>
-						<p>Show de bola, comunicação bi-direcional em páginas ou sistemas web é muito bacana mesmo</p>
-					</div>
+				<div class="col-md-10" id="dialogos">
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -142,6 +118,23 @@
 		</nav>		
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+		<script src="/socket.io/socket.io.js"></script>
+
+		<script>
+
+			var socket = io('http://localhost:3000');
+
+			socket.on('msgParaCliente', function(data){
+				var html = '';
+				html += '<div class="dialogo">';
+				html += '<h4>' + data.apelido + '</h4>';
+				html += '<p>' + data.mensagem + '</p>';
+				html += '</div>';
+				$('#dialogos').append(html);
+			});
+
+		</script>
 		
 	</body>
 </html>
