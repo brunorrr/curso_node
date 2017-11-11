@@ -24,12 +24,12 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form accept-charset="UTF-8" role="form" class="form-signin" action="/chat" method="POST">
+                            <form accept-charset="UTF-8" role="form" class="form-signin" method="post" action="/chat">
                                 <fieldset>
                                     <label class="panel-login">
                                         <div class="login_result"></div>
                                     </label>
-                                    <input class="form-control" placeholder="Nome ou apelido" id="apelido" name="apelido" type="text">
+                                    <input class="form-control" placeholder="Nome ou apelido" id="apelido" type="text" name="apelido">
                                     <br></br>
                                     <input class="btn btn-lg btn-success btn-block" type="submit" id="entrar" value="Entrar »">
                                 </fieldset>
@@ -37,14 +37,18 @@
                         </div>
                     </div>
                     <div>
-                        <% if(validacao.length > 0){ %>
+                        <% if( validacao.length > 0 ){ %>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert alert-danger">
-                                        <strong>Atenção!</strong>
+                                    <div class="alert-danger">
+                                        <strong>
+                                            Atenção
+                                        </strong>
                                         <ul>
-                                            <% for(var i = 0; i < validacao.length; i++){ %>
-                                                <li><%= validacao[i].msg %></li>
+                                            <% for(var index in validacao){ %>
+                                                <li>
+                                                    <%= validacao[index].msg %>
+                                                </li>
                                             <% } %>
                                         </ul>
                                     </div>

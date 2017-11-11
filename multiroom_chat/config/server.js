@@ -17,6 +17,8 @@ var app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
+app.config = require('./configVar.js');
+
 /* configurar o middleware express.static */
 app.use(express.static('./app/public'));
 
@@ -31,7 +33,7 @@ consign()
     .include('app/routes')
     .then('app/models')
     .then('app/controllers')
-    .into(app)
+    .into(app);
 
 /* exportar o objeto app */
 module.exports = app;

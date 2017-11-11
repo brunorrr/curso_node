@@ -71,14 +71,10 @@
 		<div class="container">
             <div class="row conversa" id="conversa">
 				<div class="col-md-1"></div>
-<<<<<<< HEAD
-				<div class="col-md-10" id="dialogos">
-=======
 				<div class="col-md-10">
 					<!-- Caixas diálogo -->
 					<div id="dialogos">
 					</div>
->>>>>>> 16b3063
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -116,25 +112,6 @@
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<<<<<<< HEAD
-		<script src="/socket.io/socket.io.js"></script>
-
-		<script>
-
-			var socket = io('http://localhost:3000');
-
-			socket.on('msgParaCliente', function(data){
-				var html = '';
-				html += '<div class="dialogo">';
-				html += '<h4>' + data.apelido + '</h4>';
-				html += '<p>' + data.mensagem + '</p>';
-				html += '</div>';
-				$('#dialogos').append(html);
-			});
-
-		</script>
-		
-=======
 		<script src="socket.io/socket.io.js"></script>
 		<script type="text/javascript">
 			var socket = io('http://localhost');
@@ -174,6 +151,5 @@
 				$('#pessoas').append(html);
 			})
 		</script>
->>>>>>> 16b3063
 	</body>
 </html>
