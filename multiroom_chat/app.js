@@ -20,8 +20,15 @@ io.on('connection',function(socket){
 
 	socket.on('msgParaServidor', function(data){
 
-		io.emit('msgParaCliente',
-		{ apelido: data.apelido, mensagem: data.mensagem} );
+		//TODO remover setTimeout e definir oque será enviado para o cliente como mensagem ok
+		setTimeout(
+			function(){
+				socket.broadcast.emit('msgParaCliente',
+				{ apelido: data.apelido, mensagem: data.mensagem} );
+				socket.emit('okMsgEnviada',{});
+			},
+			1000
+		);
 
 		/* participantes */
 		if( data.apelido_atualizado == '0' ){

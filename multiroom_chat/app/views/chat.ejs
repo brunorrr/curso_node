@@ -113,43 +113,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 		<script src="socket.io/socket.io.js"></script>
-		<script type="text/javascript">
-			var socket = io('http://localhost');
+		<script src="js/controlador.js"></script>
 
-			$('#form-envio-msg').on('submit',function(e){
-				if( $('#mensagem').val() ){
-					socket.emit(
-						'msgParaServidor',
-						{apelido: $('#apelido').val(), 
-						mensagem: $('#mensagem').val(),
-						apelido_atualizado : $('#apelido_atualizado').val()}
-					);
-					$('#apelido_atualizado').val('1');
-					$('#mensagem').val('');
-				}
-				e.preventDefault();
-			});
-
-			socket.on('msgParaCliente', function(data){
-
-				var html = '<div class="dialogo">'+
-					'<h4>' + data.apelido + '</h4>' +
-					'<p>' + data.mensagem + '</p>' + 
-				'</div>';
-
-				$('#dialogos').append(html);
-
-				window.scrollTo(0, document.body.scrollHeight)
-			})
-
-			socket.on('participantesParaCliente', function(data){
-				var html = '<span class="participante">' +
-					'<img src="images/ico_usuario.png" alt="Imagem usuário" />' +
-					data.apelido +
-				'</span>';
-				console.log(data);
-				$('#pessoas').append(html);
-			})
-		</script>
 	</body>
 </html>
