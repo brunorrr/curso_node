@@ -1,12 +1,12 @@
 {
   "name": "multiroom_chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicação de simulação de um MMORPG para Game of Thrones",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jorge",
+  "author": "Bruno Ricci",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
