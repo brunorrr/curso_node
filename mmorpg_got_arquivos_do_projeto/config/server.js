@@ -33,6 +33,7 @@ app.use(expressValidator());
 consign()
 	.include('app/routes')
 	.then('app/models')
+	.then('config/dbConnection.js')
 	.then('app/controllers')
 	.into(app);
 
