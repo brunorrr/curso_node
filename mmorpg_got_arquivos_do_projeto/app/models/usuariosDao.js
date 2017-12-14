@@ -16,6 +16,25 @@ UsuariosDao.prototype.inserirUsuario = function( usuario ){
 	});
 }
 
+UsuariosDao.prototype.autenticar = function(usuario,req){
+	//Abrindo conexão com o BD
+	this._connection.open(function(err, mongoClient){
+		//Abrindo a coleção para a manipulação de documentos
+		mongoClient.collection("usuarios", function(err, collection){
+			//Procurando na collection um usuário que esteja cadastrado
+			collection.find({usuario: usuario.usuario, senha: usuario.senha}).toArray(function(err,result){
+				if(result[0]){
+					//Definindo na sessão que o usuário está autorizado a acessar as páginas restritas
+					req.session.autorizado = true;
+				}
+
+			});
+
+			mongoClient.close();
+		});
+	});
+}
+
 module.exports = function(){
 	return UsuariosDao;
 }
