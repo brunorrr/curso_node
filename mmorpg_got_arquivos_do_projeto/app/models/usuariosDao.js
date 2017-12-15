@@ -26,6 +26,14 @@ UsuariosDao.prototype.autenticar = function(usuario,req){
 				if(result[0]){
 					//Definindo na sessão que o usuário está autorizado a acessar as páginas restritas
 					req.session.autorizado = true;
+
+					req.session.usuario = result[0].usuario;
+					req.session.casa = result[0].casa;
+
+					res.redirect('jogo');
+				}
+				else{
+					res.render('index',{validacao:{}});
 				}
 
 			});
