@@ -19,15 +19,6 @@ module.exports.autenticar = function(app,req,res){
 	var connection = app.config.dbConnection;
 	var usuarioDao = new app.app.models.usuariosDao( connection );
 
-	usuarioDao.autenticar(dadosForm, req);
+	usuarioDao.autenticar(dadosForm, req, res);
 
-	//TODO terminar de realizar as alterações do vídeo
-	if(req.session.autorizado){
-		//Usuário autenticado
-	}
-	else{
-		//Usuário não autenticado
-	}
-
-	res.send('ok')
 }
