@@ -18,3 +18,13 @@ module.exports.sair = function(app,req,res){
 		res.render('index',{validacao:{}});
 	});
 }
+
+module.exports.suditos = function(app,req,res){
+
+	res.render('aldeoes',{validacao:{}});
+}
+
+module.exports.pergaminhos = function(app,req,res){
+
+	res.render('pergaminhos',{validacao:{}});
+}
