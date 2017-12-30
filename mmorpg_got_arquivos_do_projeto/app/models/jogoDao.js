@@ -1,3 +1,5 @@
+var ObjectId = require('mongodb').ObjectId;
+
 function JogoDao(connection){
 	this._connection = connection();
 }
@@ -57,6 +59,23 @@ JogoDao.prototype.acao = function(acao){
 			acao.acaoTerminaEm = date.getTime() + tempo;
 
 			collection.insert(acao);
+		});
+
+		mongoClient.collection("jogo", function(err, collection){
+
+			var moedas = 0;
+			switch( parseInt(acao.acao) ){
+				case 1: moedas = -2; break;
+				case 2: moedas = -3; break;
+				case 3: moedas = -1; break;
+				case 4: moedas = -1; break;
+			}
+			moedas = moedas * acao.quantidade;
+
+			//Fazendo update com cálculo na ação para decrementar a quantidade de dinheiro
+			collection.update(
+				{ usuario: acao.usuario },
+				{ $inc: {moeda: moedas} } );
 
 			mongoClient.close();
 		});
@@ -70,6 +89,8 @@ JogoDao.prototype.getAcoes = function(usuario,res){
 		mongoClient.collection("acao", function(err, collection){
 			var momentoAtual = new Date().getTime();
 
+			console.log(collection)
+
 			//Procurando na collection um usuário que esteja cadastrado e com uma ação futura
 			collection.find({usuario: usuario, acaoTerminaEm: { $gt: momentoAtual } }).toArray(function(err,result){
 				
@@ -77,6 +98,22 @@ JogoDao.prototype.getAcoes = function(usuario,res){
 
 				res.render('pergaminhos', {acoes: result});
 			});
+		});
+	});
+}
+
+JogoDao.prototype.revogarAcao = function(_id, res){
+	//Abrindo conexão com o BD
+	this._connection.open(function(err, mongoClient){
+		//Abrindo a coleção para a manipulação de documentos
+		mongoClient.collection("acao", function(err, collection){
+			//Removendo a ação
+			collection.remove(
+				{_id : ObjectId(_id)},
+				function(err, result){
+					res.redirect('jogo?msg=D');
+				}
+			);
 		});
 	});
 }
