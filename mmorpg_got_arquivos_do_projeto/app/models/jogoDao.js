@@ -46,11 +46,11 @@ JogoDao.prototype.acao = function(acao){
 			var tempo = 0;
 
 			//Verificando pelas ações qual é o tempo de execução de cada uma
-			switch( acao.acao ){
-				case 1: tempo = 3600000;
-				case 2: tempo = 1 * 3600000;
-				case 3: tempo = 3 * 3600000;
-				case 4: tempo = 5 * 3600000;
+			switch( parseInt(acao.acao) ){
+				case 1: tempo = 3600000; break;
+				case 2: tempo = 1 * 3600000; break;
+				case 3: tempo = 3 * 3600000; break;
+				case 4: tempo = 5 * 3600000; break;
 			}
 
 			var date = new Date();
@@ -59,6 +59,22 @@ JogoDao.prototype.acao = function(acao){
 			collection.insert(acao);
 
 			mongoClient.close();
+		});
+	});
+}
+
+JogoDao.prototype.getAcoes = function(usuario,res){
+	//Abrindo conexão com o BD
+	this._connection.open(function(err, mongoClient){
+		//Abrindo a coleção para a manipulação de documentos
+		mongoClient.collection("acao", function(err, collection){
+			//Procurando na collection um usuário que esteja cadastrado
+			collection.find({usuario: usuario}).toArray(function(err,result){
+				
+				mongoClient.close();
+
+				res.render('pergaminhos', {acoes: result});
+			});
 		});
 	});
 }
