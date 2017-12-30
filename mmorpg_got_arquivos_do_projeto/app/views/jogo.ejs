@@ -34,11 +34,26 @@
 						metodo: 'get',
 						success: function(data){
 							$('#acoes').html(data);
+
+							cronometro();
 						}
 					});
 				});
 			});
 			
+			function cronometro(){
+				$('.tempo_restante').each(function(){
+					var segundos = $(this).html();
+
+					if(segundos < 0){
+						window.location.href = '/jogo?msg=F';
+					}
+
+					$(this).html(parseInt(segundos) - 1);
+				});
+			}
+
+			setInterval('cronometro()', 1000);
 		</script>
 
 	</head>
@@ -69,8 +84,13 @@
 	    				Operação inválida! verifique se todos os campos foram preenchidos.
 	    			</strong>
 	    		</div>
+	    	<% } else if(msg == 'F') { %>
+	    		<div class="alert alert-info" id='msg_erros'>
+	    			<strong>
+	    				Ação finalizada!
+	    			</strong>
+	    		</div>
 	    	<% } %>
-
 	    	
 	    	
 			<div class="row">

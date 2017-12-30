@@ -19,7 +19,7 @@
 			%>
 			<li>
 				<%=acoes[i].quantidade%> <%=txt_acao%>
-				 - <small>restam <%= segundosRestantes%> segundos 
+				 - <small>restam <span class="tempo_restante"><%= segundosRestantes%></span> segundos 
 				 - <a href="#">revogar ordem</a></small>
 			</li>
 		<% } %>
