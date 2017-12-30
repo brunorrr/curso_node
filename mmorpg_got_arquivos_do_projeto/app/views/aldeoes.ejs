@@ -1,12 +1,12 @@
 <div id="aldecoes">					
 	<h3>Aldeões</h3>
 	
-	<form class="form-cadastro">
+	<form class="form-cadastro" action="/ordenar_acao_sudito" method="post">
 
 		<div class="row">
 			<div class="col-xs-5">
 				<div class="form-group">
-					<select class="form-control">
+					<select class="form-control" name="acao">
 						<option value="">-- Escolha a ação</option>
 						<option value="1">Coletar recursos (2G e 1H)</option>
 						<option value="1">Enforcar aldeão (3G e 2H)</option>
@@ -18,7 +18,7 @@
 			
 			<div class="col-xs-3">
 				<div class="form-group">
-					<input type="number" class="form-control" id="quantidade" placeholder="Quantidade">									
+					<input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade">
 				</div>
 			</div>
 			

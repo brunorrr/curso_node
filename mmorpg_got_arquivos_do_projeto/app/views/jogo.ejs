@@ -17,6 +17,7 @@
 		<script>
 			$(document).ready( function(){
 				$('#btn_suditos').click(function(e){
+					$('#msg_erros').hide();
 					$.ajax({
 						url: '/suditos',
 						metodo: 'get',
@@ -27,6 +28,7 @@
 				});
 
 				$('#btn_pergaminho').click(function(e){
+					$('#msg_erros').hide();
 					$.ajax({
 						url: '/pergaminhos',
 						metodo: 'get',
@@ -54,6 +56,22 @@
 		</nav>
 
 	    <div class="container">
+			
+	    	<% console.log(msg); if(msg == 'S') { %>
+	    		<div class="alert alert-success" id='msg_erros'>
+	    			<strong>
+	    				Operação realizada!
+	    			</strong>
+	    		</div>
+	    	<% } else if(msg == 'E') { %>
+	    		<div class="alert alert-danger" id='msg_erros'>
+	    			<strong>
+	    				Operação inválida! verifique se todos os campos foram preenchidos.
+	    			</strong>
+	    		</div>
+	    	<% } %>
+
+	    	
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
