@@ -89,8 +89,6 @@ JogoDao.prototype.getAcoes = function(usuario,res){
 		mongoClient.collection("acao", function(err, collection){
 			var momentoAtual = new Date().getTime();
 
-			console.log(collection)
-
 			//Procurando na collection um usuário que esteja cadastrado e com uma ação futura
 			collection.find({usuario: usuario, acaoTerminaEm: { $gt: momentoAtual } }).toArray(function(err,result){
 				
