@@ -2,13 +2,16 @@
 var express = require('express'),
 		bodyParser = require('body-parser'),
 		mongodb = require('mongodb'),
-		objectId = require('mongodb').ObjectId;
+		objectId = require('mongodb').ObjectId,
+		multiparty = require('connect-multiparty'),
+		fs = require('fs');
 
 var app = express();
 
 //body-parser
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
+app.use(multiparty());
 
 var port = 8080;
 
@@ -28,20 +31,39 @@ app.get('/',function(req,res){
 
 //inclusão
 app.post('/api', function(req,res){
-	var dados = req.body;
+	res.setHeader('Access-Control-Allow-Origin', '*');
 
-	db.open( function(err, mongoclient){
-		mongoclient.collection('postagens', function(err, collecion){
-			collecion.insert(dados, function(err, records){
-				if( err ){
-					res.status(500).json(err);
-				} else{
-					res.status(204).end();
-				}
-				mongoclient.close();
+	var date = new Date();
+
+	var url_imagem = date.getTime() + '_' + req.files.arquivo.originalFilename;
+
+	var path_origem = req.files.arquivo.path;
+	var path_destino = './uploads/' + url_imagem;
+
+	fs.rename(path_origem, path_destino, function(err){
+		if( err ){
+			res.status(500).json({error: err});
+			return;
+		}
+
+		var dados = {
+			url_imagem: req.files.arquivo.originalFilename,
+			titulo: req.body.titulo,
+		}
+
+		db.open( function(err, mongoclient){
+			mongoclient.collection('postagens', function(err, collecion){
+				collecion.insert(dados, function(err, records){
+					if( err ){
+						res.status(500).json(err);
+					} else{
+						res.status(204).end();
+					}
+					mongoclient.close();
+				});
 			});
-		});
-	})
+		})
+	});
 });
 
 
