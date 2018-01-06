@@ -47,7 +47,7 @@ app.post('/api', function(req,res){
 		}
 
 		var dados = {
-			url_imagem: req.files.arquivo.originalFilename,
+			url_imagem: url_imagem,
 			titulo: req.body.titulo,
 		}
 
@@ -69,6 +69,8 @@ app.post('/api', function(req,res){
 
 //Leitura
 app.get('/api', function(req,res){
+
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var dados = req.body;
 
 	db.open( function(err, mongoclient){
@@ -79,9 +81,32 @@ app.get('/api', function(req,res){
 				} else{
 					res.json(results);
 				}
-				mongoclient.close();			
+				mongoclient.close();
 			});
 		});
+	})
+});
+
+app.get('/imagens/:imagem', function(req, res){
+	var img = req.params.imagem;
+
+	var divisao = img.split('.');
+
+	var extencao = divisao[ divisao.length - 1 ];
+
+	fs.readFile('./uploads/' + img, function(err, conteudo){
+		if(err){
+			res.status(400).json(err);
+			return;
+		}
+
+		/*
+			A função writeHead permite a inclusão de 1 ou mais cabeçalhos no response
+			Neste caso trabalha com 2 parâmetros, o primeiro é o status de resposta
+			o segundo é um Json com a associação chave/valor dos campos do cabeçalho
+		*/
+		res.writeHead(200, {'content-type':'image/' + extencao});
+		res.end(conteudo);
 	})
 });
 

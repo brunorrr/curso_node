@@ -67,6 +67,7 @@ body{
 .publicacao img{
 	border-top:solid 1px #EFEFEF;
 	border-bottom:solid 1px #EFEFEF;
+	max-width: 514px;
 }
 
 .comentar{
