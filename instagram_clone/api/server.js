@@ -13,6 +13,19 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(multiparty());
 
+//Middleware para manipulação do preflight request
+app.use(function(req, res, next){
+
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'content-type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+
+	console.log('Foi Preflight');
+
+	next();
+});
+
 var port = 8080;
 
 app.listen(port);
@@ -31,7 +44,6 @@ app.get('/',function(req,res){
 
 //inclusão
 app.post('/api', function(req,res){
-	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	var date = new Date();
 
@@ -70,7 +82,6 @@ app.post('/api', function(req,res){
 //Leitura
 app.get('/api', function(req,res){
 
-	res.setHeader('Access-Control-Allow-Origin', '*');
 	var dados = req.body;
 
 	db.open( function(err, mongoclient){
@@ -130,13 +141,16 @@ app.get('/api/:id', function(req,res){
 
 //Alterando registro com o método put
 app.put('/api/:id', function(req,res){
-	var dados = req.body;
 
+	var dados = req.body;
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collecion){
 			collecion.update(
 				{ _id: objectId(req.params.id) },
-				{ $set: { titulo: req.body.titulo } },
+				{ $push: { comentarios: {
+					id_comentario: new objectId(),
+					comentario : req.body.comentario
+				} } },
 				{},
 				function(err, records){
 					if( err ){
