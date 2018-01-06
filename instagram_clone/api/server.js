@@ -21,8 +21,6 @@ app.use(function(req, res, next){
 	res.setHeader('Access-Control-Allow-Headers', 'content-type');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 
-	console.log('Foi Preflight');
-
 	next();
 });
 
@@ -172,8 +170,12 @@ app.delete('/api/:id', function(req,res){
 
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collecion){
-			collecion.remove(
-				{ _id: objectId(req.params.id)},
+			collecion.update(
+				{ },
+				{ $pull: { comentarios: {
+					id_comentario: objectId(req.params.id)
+				} } },
+				{multi : true },
 				function(err, records){
 					if( err ){
 						res.status(500).json(err);
